@@ -1,0 +1,22 @@
+﻿apiVersion: v1
+kind: Pod
+metadata:
+  name: maythefourth
+  labels:
+    app: maythefourth
+  namespace: default
+spec:
+  securityContext:
+    runAsNonRoot: true
+    seccompProfile:
+      type: RuntimeDefault
+  containers:
+    - name: maythefourth
+      image: 'quay.io/skonish/maythefourth:latest'
+      ports:
+        - containerPort: 8080
+      securityContext:
+        allowPrivilegeEscalation: false
+        capabilities:
+          drop:
+            - ALL
